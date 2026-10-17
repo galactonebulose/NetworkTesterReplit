@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Network Test Monitor"
+description = "A responsive single-page dashboard for tracking network test results, latency, packet loss, and status, with live summary metrics, filtering, and test management."
+version = "1.0.0"
+id = "artifacts/network-test-monitor"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22674
+
+[services.development]
+run = "pnpm --filter @workspace/network-test-monitor run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/network-test-monitor", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/network-test-monitor/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22674"
+BASE_PATH = "/"

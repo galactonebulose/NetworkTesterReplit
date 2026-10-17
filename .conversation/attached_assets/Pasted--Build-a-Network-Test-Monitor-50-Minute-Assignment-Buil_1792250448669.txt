@@ -1,0 +1,128 @@
+# Build a Network Test Monitor — 50-Minute Assignment
+
+Build a complete, working, single-page web application called **Network Test Monitor**.
+
+This is a beginner–intermediate, time-limited coding assignment. Prioritize working functionality over architectural complexity. Do not overengineer it.
+
+## Technology
+- React with Vite.
+- JavaScript and plain CSS.
+- React state for all test data and UI interactions.
+- No backend, database, authentication, routing library, or global state-management library.
+- Avoid unnecessary dependencies. Implement the functionality directly where practical.
+
+## P0 — Mandatory functionality
+
+### 1. Dashboard overview
+Display four summary cards:
+- Total Tests
+- Passed Tests
+- Failed Tests
+- Average Latency (ms)
+
+Calculate every metric dynamically from the current test list. Average latency should be the arithmetic mean of the latency values of all tests, including Running tests. Display a sensible value such as `0 ms` when there are no tests.
+
+### 2. Network test data
+Each test must contain:
+- Unique ID
+- Test name
+- Network type: 4G, 5G, or Wi-Fi
+- Latency in milliseconds
+- Packet loss percentage
+- Status: Passed, Failed, or Running
+
+Initialize the application with at least five realistic sample tests containing a mix of network types and statuses.
+
+### 3. Add a test
+Provide a clearly visible Add Test button that reveals an inline form or a simple modal.
+
+The form must have:
+- Test name text input
+- Network type dropdown
+- Latency numeric input
+- Packet loss numeric input
+- Status dropdown
+- Submit/Add Test and Cancel actions
+
+On successful submission, add the new test to React state, update the dashboard metrics, and display the test in the table. Clear the form after a successful addition. Cancel should close the form without adding anything.
+
+### 4. Search and filter
+- Provide a search input that filters tests by test name as the user types. Make the search case-insensitive.
+- Provide a status dropdown with All Statuses, Passed, Failed, and Running.
+- Search and status filtering must work together.
+- Filtering must not change the underlying test data or dashboard metrics.
+
+### 5. Tests table
+Display these columns:
+- Test Name
+- Network Type
+- Latency (ms)
+- Packet Loss (%)
+- Status
+- Actions
+
+Show clear status badges with distinct styling for Passed, Failed, and Running.
+
+Each row must have a working Delete button. Deleting a test must update the table and dashboard metrics immediately. Do not use hardcoded metric values.
+
+## P1 — Validation and usability
+
+Validate the form before creating a test:
+- Test name is required and cannot contain only whitespace.
+- Network type and status must be valid selections.
+- Latency must be a valid, non-negative number.
+- Packet loss must be a valid number between 0 and 100 inclusive.
+- Zero is a valid latency and packet-loss value.
+- Reject blank numeric fields instead of silently treating them as zero.
+
+Display a clear, field-specific validation message near the relevant input. Do not add invalid tests.
+
+When the current search and status filter produce no matching results, display a useful empty state, such as “No tests match your filters.” When the entire dataset is empty, explain that the user can add a test.
+
+Include a way to cancel the Add Test form. Keep inputs labelled and make buttons usable on small screens.
+
+## P2 — Visual polish, only after functionality works
+
+Create a professional, modern network-monitoring dashboard:
+- Light background and a restrained blue/indigo accent.
+- Clean summary cards with readable metric values.
+- Clear page title and compact description.
+- Well-spaced search and filter controls.
+- A readable table with subtle borders and status badges.
+- Consistent buttons, input styles, spacing, and typography.
+- Responsive layout for desktop and mobile. The table may scroll horizontally on narrow screens.
+
+Keep the design focused on an engineering dashboard. Do not spend time building charts, animations, theme switching, authentication, or features that are not requested.
+
+## Implementation guidance
+- Keep the project structure simple. A reasonable structure is `src/App.jsx`, `src/index.css`, `src/main.jsx`, and `src/data.js`.
+- Extract a small reusable component, such as a summary metric card, only when it improves clarity.
+- Keep test data in React state and derive metrics and filtered results from that state.
+- Use stable, unique IDs for tests.
+- Keep the code readable and easy to debug.
+- Do not create unnecessary files or abstractions.
+- Do not replace working project configuration without a reason.
+- Do not leave any buttons or controls as visual placeholders.
+
+## Priority order
+1. Make all P0 features work.
+2. Implement P1 validation and edge cases.
+3. Apply P2 visual polish if time remains.
+4. Run the application and fix errors before finishing.
+
+## Acceptance checks
+Verify the following manually:
+1. The app starts successfully.
+2. Five or more sample tests appear initially.
+3. All four dashboard metrics are correct.
+4. Adding a valid test updates the table and metrics.
+5. Empty names, negative latency, and packet loss below 0 or above 100 are rejected.
+6. Zero latency and zero packet loss are accepted.
+7. Search is case-insensitive.
+8. Search and status filtering work simultaneously.
+9. Deleting a test updates the metrics.
+10. An empty state appears when no tests match.
+11. Cancel closes the form without adding a test.
+12. The layout remains usable at a mobile viewport width.
+
+Finally, provide the commands needed to run the application in Replit and a brief summary of the implemented features. Fix any build or runtime errors you encounter instead of merely listing them.
